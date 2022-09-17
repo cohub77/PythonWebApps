@@ -3,7 +3,6 @@ body * {
     margin: 0;
     padding: 0;
     background-color: rgb(20, 20, 20);
-      
 }
 
 .container {
@@ -24,4 +23,11 @@ img {
     box-shadow: 2px 2px 5px black;
     margin: 3em;
     max-width: 80%;
+}
+
+html {
+
+    background-color: rgb(20, 20, 20);
+
+
 }
