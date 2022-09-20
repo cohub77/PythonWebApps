@@ -1,11 +1,15 @@
+from django.views.generic import RedirectView
 from django.urls import path
-from hero.views import HulkView, IndexView, IronManView, BlackWidow, HindsightLad, ThreeDMan
+
+from hero.views import PhotoDetailView, PhotoListView
+
 
 urlpatterns = [
-    path('hulk',        HulkView.as_view()),
-    path('ironman',        IronManView.as_view()),
-    path('blackwidow',        BlackWidow.as_view()),
-    path('hindsightlad',        HindsightLad.as_view()),
-    path('3dman',        ThreeDMan.as_view()),
-    path('',            IndexView.as_view()),
+
+    # Home
+    path('', RedirectView.as_view(url='photo/')),
+
+    # Photos
+    path('photo/', PhotoListView.as_view()),
+    path('photo/<int:id>', PhotoDetailView.as_view()),
 ]
