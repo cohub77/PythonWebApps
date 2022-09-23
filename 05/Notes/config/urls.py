@@ -22,6 +22,7 @@ urlpatterns = [
 
     # Admin
     path('admin/', admin.site.urls),
+    
 
     # Note
     path('', NoteListView.as_view()),

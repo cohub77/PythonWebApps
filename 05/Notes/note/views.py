@@ -41,4 +41,3 @@ class NoteDetailView(TemplateView):
         photos = photo_list()
         p = photos[kwargs['pk']]
         return dict(photo=p)
-    
