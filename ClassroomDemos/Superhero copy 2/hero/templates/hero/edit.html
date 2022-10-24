@@ -1,0 +1,29 @@
+{% extends 'theme.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Edit Hero
+{% endblock title %}
+
+{if }
+
+{% block content %}
+
+<div class="container m-5">
+
+    {% load crispy_forms_tags %}
+
+
+    <form action="" method="post">{% csrf_token %}
+
+        {{ form|crispy }}
+
+        <button class="btn btn-dark m-5" type="submit">Save Record</button>
+        <a class="btn btn-dark m-5" href="delete">Delete Record</a>
+        <a class="btn btn-dark m-5" href="..">Discard Changes</a>
+
+    </form>
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'theme.html' %}
+
+
+{% block title %}
+Hero Details
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="row">
+
+    <div class="card col-lg">
+
+        <div class="card-header person">
+            HERO
+        </div>
+        <div class="card-body">
+
+
+            <table class="table">
+                <tr>
+                    <td>Name</td>
+                    {% if request.user.username == object.author.username%}
+                    <td><a href="/{{ object.pk }}/">{{ object.name }}</a></td>
+                    {% else %}
+                    <td>{{ object.name }}</td>
+                    {% endif %}
+
+                </tr>
+                <tr>3
+                    <td>Identity</td>
+                    <td>{{ object.identity }}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{ object.description }}</td>
+                </tr>
+                <tr>
+                    <td>Strengths</td>
+                    <td>{{ object.strengths }}</td>
+                </tr>
+                <tr>
+                    <td>Weaknesses</td>
+                    <td>{{ object.weaknesses }}</td>
+                </tr>
+            </table>
+            <p>
+                <img class="photo" src="{{ object.image }}" alt="Hero" width=500>
+            </p>
+            <p>
+                <a href=".." class="btn btn-dark m-5">Back to List</a>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

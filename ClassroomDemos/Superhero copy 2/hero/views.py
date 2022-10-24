@@ -7,7 +7,9 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from .models import *
-from django.views.generic import RedirectView
+
+from .models import Superhero, User
+
 
 class HeroListView(ListView):
     template_name = 'hero/list.html'
@@ -60,6 +62,16 @@ class MyHeroesView(LoginRequiredMixin, ListView):
 class UserListView(LoginRequiredMixin, ListView):
     model = User
     template_name = "user_detail.html"
+
+
+# class ArticleCreateView(LoginRequiredMixin, CreateView):
+#   template_name = "article_add.html"
+#    model = Article
+#    fields = '__all__'
+#
+#    def form_valid(self, form):
+#        form.instance.author = self.request.user
+#        return super().form_valid(form)
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
