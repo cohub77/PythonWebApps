@@ -26,7 +26,11 @@ class HeroCreateView(LoginRequiredMixin, CreateView):
     model = Superhero
     fields = ['name', 'identity', 'description',
               'image', 'strengths', 'weaknesses']
-
+    
+class HeroCreateView(LoginRequiredMixin, CreateView):
+    template_name = "hero/add.html"
+    model = Superhero
+    fields = '__all__'
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -38,10 +42,10 @@ class HeroUpdateView(LoginRequiredMixin, UpdateView):
     fields = '__all__'
 
 
-class HeroDeleteView(LoginRequiredMixin, DeleteView):
+class HeroDeleteView(DeleteView):
     model = Superhero
     template_name = 'hero/delete.html'
-    success_url = '..'
+    success_url = reverse_lazy('hero_list')
 
 
 class SignUpView(CreateView):
