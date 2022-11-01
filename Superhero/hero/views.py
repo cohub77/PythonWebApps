@@ -1,61 +1,72 @@
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+from django.shortcuts import render
+from django.contrib.auth.models import User
+from .models import *
+from django.views.generic import RedirectView
 
-class PhotoView(TemplateView):
-    template_name = 'photo.html'
+class HeroListView(ListView):
+    template_name = 'hero/list.html'
+    model = Superhero
+    context_object_name = "heroes"
 
-    def get_context_data(self, **kwargs):
-        p = kwargs['name']
-        p = f'/static/images/{p}'
-        return dict(photo=p)
+
+class HeroDetailView(DetailView):
+    template_name = 'hero/detail.html'
+    model = Superhero
+    context_object_name = "hero"
+
+
+class HeroCreateView(LoginRequiredMixin, CreateView):
+    template_name = "hero/add.html"
+    model = Superhero
+    fields = ['name', 'identity', 'description',
+              'image', 'strengths', 'weaknesses']
     
-class HulkView(TemplateView):
-    template_name = 'hero.html'
+class HeroCreateView(LoginRequiredMixin, CreateView):
+    template_name = "hero/add.html"
+    model = Superhero
+    fields = '__all__'
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
-        return {
-            'title': 'Hulk',
-            'id': 'Bruce Banner',
-            'image': '/static/images/hulk.jpg'
-        }
-        
-class IronManView(TemplateView):
-    template_name = 'hero.html'
 
-    def get_context_data(self, **kwargs):
-        return {
-            'title': 'Iron Man',
-            'id': 'Tony',
-            'image': '/static/images/iron_man.jpg'
-        }
-class BlackWidow(TemplateView):
-    template_name = 'hero.html'
+class HeroUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "hero/edit.html"
+    model = Superhero
+    fields = '__all__'
 
-    def get_context_data(self, **kwargs):
-        return {
-            'title': 'Black Widow',
-            'id': 'idk',
-            'image': '/static/images/black_widow.jpg'
-        }
-class HindsightLad(TemplateView):
-    template_name = 'hero.html'
 
-    def get_context_data(self, **kwargs):
-        return {
-            'title': 'Hindsight Lad',
-            'id': 'Carlton LaFroyge',
-            'image': '/static/images/Origin-of-Hindsight-Lad.png'
-        }
-class ThreeDMan(TemplateView):
-    template_name = 'hero.html'
+class HeroDeleteView(DeleteView):
+    model = Superhero
+    template_name = 'hero/delete.html'
+    success_url = reverse_lazy('hero_list')
 
-    def get_context_data(self, **kwargs):
-        return {
-            'title': '3-D Man',
-            'id': 'Chuck Chandler',
-            'image': '/static/images/3dman.png'
-        }
-from django.views.generic import TemplateView
 
-class IndexView(TemplateView):
-    template_name = 'heroes.html'        
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("login")
+    template_name = "registration/signup.html"
 
+
+class MyHeroesView(LoginRequiredMixin, ListView):
+    model = Superhero
+    template_name = "registration/my_heroes.html"
+    context_object_name = "heroes"
+    fields = '__all__'
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    model = User
+    template_name = "user_detail.html"
+
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "registration/profile.html"
+    model = User
+    fields = '__all__'
