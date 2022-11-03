@@ -48,11 +48,6 @@ class HeroDeleteView(DeleteView):
     success_url = reverse_lazy('hero_list')
 
 
-class SignUpView(CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy("login")
-    template_name = "registration/signup.html"
-
 
 class MyHeroesView(LoginRequiredMixin, ListView):
     model = Superhero
