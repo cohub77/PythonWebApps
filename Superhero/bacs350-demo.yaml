@@ -1,0 +1,64 @@
+databases:
+- engine: PG
+  name: db
+  num_nodes: 1
+  size: db-s-dev-database
+  version: "12"
+envs:
+- key: DEBUG
+  scope: RUN_AND_BUILD_TIME
+  value: "True"
+- key: DISABLE_COLLECTSTATIC
+  scope: RUN_AND_BUILD_TIME
+  value: "1"
+name: bacs350-demo
+region: nyc
+services:
+- environment_slug: python
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  - key: POSTGRES_DB
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.DATABASE}
+  - key: POSTGRES_HOST
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.HOSTNAME}
+  - key: POSTGRES_USER
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.USERNAME}
+  - key: POSTGRES_PASSWORD
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.PASSWORD}
+  - key: POSTGRES_PORT
+    scope: RUN_AND_BUILD_TIME
+    value: ${db.PORT}
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: cohub77/PythonWebApps
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: bacs350-demo-app
+  routes:
+  - path: /
+  run_command: |
+    python manage.py migrate --no-input
+    python manage.py loaddata test.json
+    gunicorn --worker-tmp-dir /dev/shm config.wsgi
+  source_dir: Superhero
+static_sites:
+- environment_slug: html
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: cohub77/PythonWebApps
+  name: pythonwebapps-superhero-static
+  routes:
+  - path: /static
+  source_dir: Superhero/static
