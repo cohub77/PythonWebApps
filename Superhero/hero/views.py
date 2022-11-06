@@ -9,16 +9,18 @@ from django.contrib.auth.models import User
 from .models import *
 from django.views.generic import RedirectView
 
+class HomeView(ListView):
+    template_name = "hero/home.html"
+    model = Superhero
+    
 class HeroListView(ListView):
     template_name = 'hero/list.html'
     model = Superhero
-    context_object_name = "heroes"
 
 
 class HeroDetailView(DetailView):
     template_name = 'hero/detail.html'
     model = Superhero
-    context_object_name = "hero"
 
 
 class HeroCreateView(LoginRequiredMixin, CreateView):
@@ -27,10 +29,6 @@ class HeroCreateView(LoginRequiredMixin, CreateView):
     fields = ['name', 'identity', 'description',
               'image', 'strengths', 'weaknesses']
     
-class HeroCreateView(LoginRequiredMixin, CreateView):
-    template_name = "hero/add.html"
-    model = Superhero
-    fields = '__all__'
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -69,4 +67,44 @@ class UserListView(LoginRequiredMixin, ListView):
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "registration/profile.html"
     model = User
+    fields = '__all__'
+
+class ArticleListView(ListView):
+    model = Article
+    template_name = 'articles/list.html'
+    context_object_name = "articles"
+
+
+class ArticleCreateView(LoginRequiredMixin, CreateView):
+    template_name = "articles/add.html"
+    model = Article
+    fields = ['title', 'date', 'body', 'image']
+
+    def form_valid(self, form):
+        form.instance.investigator = self.request.user
+        return super().form_valid(form)
+
+
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = "articles/detail.html"
+    context_object_name = "article"
+
+
+class ArticleDeleteView(LoginRequiredMixin, DeleteView):
+    model = Article
+    template_name = 'articles/delete.html'
+    success_url = '..'
+
+
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "articles/edit.html"
+    model = Article
+    fields = '__all__'
+
+
+class MyArticlesView(LoginRequiredMixin, ListView):
+    model = Article
+    template_name = "registration/my_articles.html"
+    context_object_name = "articles"
     fields = '__all__'

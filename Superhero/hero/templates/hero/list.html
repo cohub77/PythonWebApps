@@ -2,7 +2,7 @@
 
 
 {% block title %}
-Hero List
+List of Heroes
 {% endblock title %}
 
 
@@ -16,19 +16,21 @@ Hero List
             <tr>
                 <th>Name</th>
                 <th>ID</th>
+                <th>Author</th>
             </tr>
 
             {% for hero in object_list %}
             <tr>
-                <td><a href="/{{ hero.pk }}">{{ hero.name }}</a></td>
+                <td><a href="./{{ hero.pk }}">{{ hero.name }}</a></td>
                 <td>{{ hero.identity }}</td>
+                <td>{{ hero.author }}</td>
             </tr>
             {% endfor %}
 
         </table>
 
         <p>
-            <a href="/add" class="btn btn-info m-5">Add New Hero</a>
+            <a href="./add" class="btn btn-dark m-5">Add New Hero</a>
         </p>
 
     </div>

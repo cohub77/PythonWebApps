@@ -1,0 +1,42 @@
+{% extends 'theme.html' %}
+
+
+{% block title %}
+List of Articles
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="row">
+
+    <div class="card col-lg">
+
+        <table class="table table-hover">
+            <tr>
+                <th>Article</th>
+                <th>Investigator</th>
+
+            </tr>
+
+            {% for article in object_list %}
+            <tr>
+                <td><a href="./{{ article.pk }}">{{ article.title }}</a></td>
+                <td>{{ article.investigator }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% if user.is_authenticated %}
+        <p>
+            <a href="./add" class="btn btn-dark m-5">Add New Article</a>
+        </p>
+        {% else %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock content %}
