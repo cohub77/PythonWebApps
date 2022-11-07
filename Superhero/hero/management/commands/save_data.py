@@ -14,14 +14,21 @@ def save_data():
 
     with open('hero_objects.json', "w") as f:
         dump(data, f, indent=4)
-    
+        # CHANGE TO CSV
+    data = [[hero.name, hero.identity, hero.description, hero.strengths,
+            hero.weaknesses, hero.image,] for hero in Superhero.objects.all()]
+        
     with open('hero_objects.csv', 'w', newline='') as f:
-        writer(f).writerows(data)
+            writer(f).writerows(data)
+
         
     data = [b for b in Article.objects.all().values()]
 
     with open('article_objects.json', "w") as f:
         dump(data, f, indent=4)
         
+    data = [[article.title, article.date, article.body, article.image,] 
+            for article in Article.objects.all()]
+
     with open('article_objects.csv', 'w', newline='') as f:
-        writer(f).writerows(data)
+            writer(f).writerows(data)
