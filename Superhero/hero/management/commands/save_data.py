@@ -15,7 +15,7 @@ def save_data():
     with open('hero_objects.json', "w") as f:
         dump(data, f, indent=4)
     
-    with open('hero_objects.csv', newline='') as f:
+    with open('hero_objects.csv', 'w', newline='') as f:
         writer(f).writerows(data)
         
     data = [b for b in Article.objects.all().values()]
@@ -23,5 +23,5 @@ def save_data():
     with open('article_objects.json', "w") as f:
         dump(data, f, indent=4)
         
-    with open('article_objects.csv', newline='') as f:
+    with open('article_objects.csv', 'w', newline='') as f:
         writer(f).writerows(data)

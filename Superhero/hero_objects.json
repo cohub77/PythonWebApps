@@ -1,62 +1,52 @@
 [
     {
-        "id": 1,
+        "id": 7,
+        "name": "3DMan",
+        "identity": "Carlton LaFroyge",
+        "description": "None",
+        "image": "3dman.png",
+        "strengths": "3D",
+        "weaknesses": "TV's",
+        "author_id": 2
+    },
+    {
+        "id": 8,
         "name": "Hulk",
         "identity": "Bruce Banner",
         "description": "Green",
         "image": "hulk.jpg",
         "strengths": "Strong",
         "weaknesses": "Angry",
-        "author_id": 1
+        "author_id": 2
     },
     {
-        "id": 2,
+        "id": 9,
         "name": "Black Widow",
         "identity": "Romanov",
-        "description": "Spider",
+        "description": "Agent",
         "image": "black_widow.jpg",
-        "strengths": "Fighting",
-        "weaknesses": "None",
-        "author_id": 1
+        "strengths": "Gun move",
+        "weaknesses": "No powers",
+        "author_id": 2
     },
     {
-        "id": 3,
+        "id": 10,
+        "name": "Hindsight Lad",
+        "identity": "Steve",
+        "description": "20/20",
+        "image": "Origin-of-Hindsight-Lad.png",
+        "strengths": "Past",
+        "weaknesses": "Future",
+        "author_id": 2
+    },
+    {
+        "id": 11,
         "name": "Iron Man",
         "identity": "Tony Stark",
         "description": "Iron",
         "image": "iron_man.jpg",
         "strengths": "Rich",
         "weaknesses": "Ego",
-        "author_id": 1
-    },
-    {
-        "id": 4,
-        "name": "Hindsight Lad",
-        "identity": "Steve",
-        "description": "Hero",
-        "image": "Origin-of-Hindsight-Lad.png",
-        "strengths": "Hindsight",
-        "weaknesses": "Future",
-        "author_id": 1
-    },
-    {
-        "id": 5,
-        "name": "3DMan",
-        "identity": "Carl",
-        "description": "3D",
-        "image": "3dman.png",
-        "strengths": "Moving",
-        "weaknesses": "TV's",
-        "author_id": 1
-    },
-    {
-        "id": 6,
-        "name": "Cohub",
-        "identity": "Hal and Chuck Chandler",
-        "description": "None",
-        "image": "None",
-        "strengths": "None",
-        "weaknesses": "None",
         "author_id": 2
     }
 ]
