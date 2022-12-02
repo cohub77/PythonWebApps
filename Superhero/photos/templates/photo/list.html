@@ -29,7 +29,7 @@ List of Photos
                 <tr>
                     <td><a href="/photo/{{ photo.pk }}">{{ photo.title }}</a></td>
                     <td>{{ photo.image }}</td>
-                    <td><img src="/{{ photo.image }}" alt="{{ photo.image }}" width="200"></td>
+                    <td><img src="{{ photo.image }}" alt="{{ photo.image }}" width="200"></td>
                 </tr>
                 {% endfor %}
 
