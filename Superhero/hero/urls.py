@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import HeroCreateView, HeroDeleteView, HeroDetailView, HeroListView, HeroUpdateView, SignUpView, MyHeroesView, RedirectView, HomeView, ArticleCreateView, ArticleDeleteView, ArticleDetailView, ArticleListView, ArticleUpdateView 
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('', HomeView.as_view(),    name='home_list'),
@@ -26,5 +27,6 @@ urlpatterns = [
     # Admin views for users
     path('admin/', admin.site.urls),
     # path('admin/', include('admin.site.urls')),   Don't do this!
-
+    path('photo/', include('photos.urls')),
+    # Hero
 ]

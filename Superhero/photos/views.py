@@ -10,13 +10,13 @@ class PhotoView(RedirectView):
     url = reverse_lazy('photo_list')
 
 
-class ListView(ListView):
+class PhotoListView(ListView):
     template_name = 'photo/list.html'
     model = Photo
     context_object_name = 'photos'
 
 
-class CarouselView(TemplateView):
+class PhotoCarouselView(TemplateView):
     template_name = 'photo/carousel.html'
 
     def get_context_data(self, **kwargs):
@@ -24,28 +24,6 @@ class CarouselView(TemplateView):
         carousel = carousel_data(photos)
         return dict(title='Carousel View', carousel=carousel)
 
-class DetailView(DetailView):
-    template_name = 'photo/detail.html'
-    model = Photo
-    context_object_name = 'photo'
-
-
-class CreateView(LoginRequiredMixin, CreateView):
-    template_name = "photo/add.html"
-    model = Photo
-    fields = '__all__'
-
-
-class UpdateView(LoginRequiredMixin, UpdateView):
-    template_name = "photo/edit.html"
-    model = Photo
-    fields = '__all__'
-
-
-class DeleteView(LoginRequiredMixin, DeleteView):
-    model = Photo
-    template_name = 'photo/delete.html'
-    success_url = reverse_lazy('photo_list')
 
 def carousel_data(photos):
 
@@ -58,4 +36,25 @@ def carousel_data(photos):
     return [photo_data(id, photo.image) for id, photo in enumerate(photos)]
 
 
+class PhotoDetailView(DetailView):
+    template_name = 'photo/detail.html'
+    model = Photo
+    context_object_name = 'photo'
 
+
+class PhotoCreateView(LoginRequiredMixin, CreateView):
+    template_name = "photo/add.html"
+    model = Photo
+    fields = '__all__'
+
+
+class PhotoUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "photo/edit.html"
+    model = Photo
+    fields = '__all__'
+
+
+class PhotoDeleteView(LoginRequiredMixin, DeleteView):
+    model = Photo
+    template_name = 'photo/delete.html'
+    success_url = reverse_lazy('photo_list')
