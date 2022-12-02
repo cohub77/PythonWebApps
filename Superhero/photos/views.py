@@ -28,7 +28,7 @@ class PhotoCarouselView(TemplateView):
 def carousel_data(photos):
 
     def photo_data(id, image):
-        x = dict(image_url=f"/media/{image}", id=str(id), label=f"{image} {id}")
+        x = dict(image_url=f"{image}", id=str(id), label=f"{image} {id}")
         if id == 0:
             x.update(active="active", aria='aria-current="true"')
         return x
